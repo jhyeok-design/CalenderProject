@@ -21,7 +21,7 @@ public class Schedule extends BaseEntity {
     private String name;
     private String password;
 
-    public Schedule(String title, String content, String name, String password, LocalDateTime createdAt, LocalDateTime modifiedAt) {
+    public Schedule(String title, String content, String name, String password) {
         this.title = title;
         this.content = content;
         this.name = name;
@@ -29,16 +29,13 @@ public class Schedule extends BaseEntity {
 
     }
 
-    public void updateSchedule(String title, String content, String name, String password, LocalDateTime createdAt, LocalDateTime modifiedAt) {
+    public void updateSchedule(String title, String content, String name, String password) {
         this.title = title;
         this.content = content;
         this.name = name;
         this.password = password;
     }
-@PrePersist
-    public void prePersist(){
-        if (getModifiedAt() == null){
-            setModifiedAt(getCreatedAt());
-        }
-    }
+
+
 }
+
