@@ -9,5 +9,4 @@
 
 
 # 🗓️ 일정 관리 앱 ERD
-![](https://velog.velcdn.com/images/fluxing/post/e898026f-34e7-41ed-8f37-c568f0de7431/image.png)
-
+![](https://velog.velcdn.com/images/fluxing/post/faa19db9-1e73-42f9-bba1-e03a9681eb33/image.png)
