@@ -76,6 +76,7 @@ public class ScheduleService {
         );
     }
 
+    @Transactional
     public UpdateScheduleResponse update(Long scheduleId, UpdateScheduleRequest request) {
         Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(
                 () -> new IllegalArgumentException("잘못된 접근입니다.")
@@ -95,5 +96,18 @@ public class ScheduleService {
                 schedule.getTitle(),
                 schedule.getName()
         );
+    }
+
+    @Transactional
+    public void delete(Long scheduleId, DeleteScheduleRequest request) {
+        Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(
+                () -> new IllegalArgumentException("잘못된 접근입니다.")
+        );
+
+        if (request.getPassword().equals(schedule.getPassword())) {
+            throw new IllegalArgumentException("비빌번호가 틀렸습니다.");
+        }
+
+        scheduleRepository.deleteById(scheduleId);
     }
 }

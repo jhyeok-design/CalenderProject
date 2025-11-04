@@ -30,7 +30,7 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.findOne(scheduleId));
     }
 
-    @PutMapping("/schedule/{scheduleId}")
+    @PutMapping("/schedules/{scheduleId}")
     public ResponseEntity<UpdateScheduleResponse> updateSchedule(
             @PathVariable Long scheduleId,
             @RequestBody UpdateScheduleRequest request
@@ -38,5 +38,13 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.update(scheduleId, request));
     }
 
+    @DeleteMapping("/schedules/{scheduleId}")
+    public ResponseEntity<Void> deleteSchedule(
+            @PathVariable Long scheduleId,
+            @RequestBody DeleteScheduleRequest request
+    ) {
+        scheduleService.delete(scheduleId,request);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }
 
