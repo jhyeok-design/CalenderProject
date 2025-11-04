@@ -1,9 +1,7 @@
 package com.example.calenderproject.controller;
 
 
-import com.example.calenderproject.dto.CreateScheduleRequest;
-import com.example.calenderproject.dto.CreateScheduleResponse;
-import com.example.calenderproject.dto.GetScheduleResponse;
+import com.example.calenderproject.dto.*;
 import com.example.calenderproject.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,6 +28,14 @@ public class ScheduleController {
     @GetMapping("/schedules/{scheduleId}")
     public ResponseEntity<GetScheduleResponse> getOne(@PathVariable Long scheduleId) {
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.findOne(scheduleId));
+    }
+
+    @PutMapping("/schedule/{scheduleId}")
+    public ResponseEntity<UpdateScheduleResponse> updateSchedule(
+            @PathVariable Long scheduleId,
+            @RequestBody UpdateScheduleRequest request
+    ) {
+        return ResponseEntity.status(HttpStatus.OK).body(scheduleService.update(scheduleId, request));
     }
 
 }
