@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
-public class GetScheduleResponse {
+public class GetAllScheduleResponse {
 
     private final Long id;
     private final String title;
@@ -14,16 +14,14 @@ public class GetScheduleResponse {
     private final String name;
     private final LocalDateTime createdAt;
     private final LocalDateTime modifiedAt;
-    private final List<GetCommentsResponse> leaveContentList;
 
-    public GetScheduleResponse(Long id, String title, String content, String name, LocalDateTime createdAt, LocalDateTime modifiedAt, List<GetCommentsResponse> leaveContentList) {
+    public GetAllScheduleResponse(Long id, String title, String content, String name, LocalDateTime createdAt, LocalDateTime modifiedAt) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.name = name;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
-        this.leaveContentList = leaveContentList;
     }
 }
 

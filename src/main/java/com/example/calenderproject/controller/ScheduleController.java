@@ -5,6 +5,7 @@ import com.example.calenderproject.dto.request.CreateScheduleRequest;
 import com.example.calenderproject.dto.request.DeleteScheduleRequest;
 import com.example.calenderproject.dto.request.UpdateScheduleRequest;
 import com.example.calenderproject.dto.response.CreateScheduleResponse;
+import com.example.calenderproject.dto.response.GetAllScheduleResponse;
 import com.example.calenderproject.dto.response.GetScheduleResponse;
 import com.example.calenderproject.dto.response.UpdateScheduleResponse;
 import com.example.calenderproject.service.ScheduleService;
@@ -26,7 +27,7 @@ public class ScheduleController {
     }
 
     @GetMapping("/schedules")
-    public ResponseEntity<List<GetScheduleResponse>> getAll(@RequestParam(required = false) String name) {
+    public ResponseEntity<List<GetAllScheduleResponse>> getAll(@RequestParam(required = false) String name) {
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.findAll(name));
     }
 

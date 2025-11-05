@@ -4,14 +4,13 @@ package com.example.calenderproject.service;
 import com.example.calenderproject.dto.request.CreateScheduleRequest;
 import com.example.calenderproject.dto.request.DeleteScheduleRequest;
 import com.example.calenderproject.dto.request.UpdateScheduleRequest;
-import com.example.calenderproject.dto.response.CreateScheduleResponse;
-import com.example.calenderproject.dto.response.GetCommentsResponse;
-import com.example.calenderproject.dto.response.GetScheduleResponse;
-import com.example.calenderproject.dto.response.UpdateScheduleResponse;
+import com.example.calenderproject.dto.response.*;
+import com.example.calenderproject.entity.Comment;
 import com.example.calenderproject.entity.Schedule;
 import com.example.calenderproject.repository.CommentRepository;
 import com.example.calenderproject.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.Comments;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,11 +20,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ScheduleService {
     public final ScheduleRepository scheduleRepository;
     public final CommentRepository commentRepository;
+    private final CommentService commentService;
 
     @Transactional
     public CreateScheduleResponse save(CreateScheduleRequest request) {
@@ -50,7 +51,7 @@ public class ScheduleService {
     }
 
     @Transactional(readOnly = true)
-    public List<GetScheduleResponse> findAll(String name) {
+    public List<GetAllScheduleResponse> findAll(String name) {
         List<Schedule> schedules = scheduleRepository.findAll();
 
         if (name != null && !name.isEmpty()) {
@@ -61,16 +62,15 @@ public class ScheduleService {
 
         schedules.sort(Comparator.comparing(Schedule::getModifiedAt).reversed());
 
-        List<GetScheduleResponse> dtos = new ArrayList<>();
+        List<GetAllScheduleResponse> dtos = new ArrayList<>();
         for (Schedule schedule : schedules) {
-            GetScheduleResponse dto = new GetScheduleResponse(
+            GetAllScheduleResponse dto = new GetAllScheduleResponse(
                     schedule.getId(),
                     schedule.getTitle(),
                     schedule.getContent(),
                     schedule.getName(),
                     schedule.getCreatedAt(),
                     schedule.getModifiedAt()
-
             );
             dtos.add(dto);
         }
@@ -83,6 +83,16 @@ public class ScheduleService {
                 () -> new IllegalArgumentException("잘못된 접근입니다.")
         );
 
+        List<Comment> comments = commentRepository.findBySchedule(schedule);
+        List<GetCommentsResponse> leaveContentList = comments.stream()
+                .map(comment -> new GetCommentsResponse(
+                        comment.getId(),
+                        comment.getLeaveComment(),
+                        comment.getWriter(),
+                        comment.getCreatedAt(),
+                        comment.getModifiedAt()))
+                .toList();
+
 
         return new GetScheduleResponse(
                 schedule.getId(),
@@ -90,7 +100,10 @@ public class ScheduleService {
                 schedule.getContent(),
                 schedule.getName(),
                 schedule.getCreatedAt(),
-                schedule.getModifiedAt()
+                schedule.getModifiedAt(),
+                leaveContentList
+
+
         );
     }
 
