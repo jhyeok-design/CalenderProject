@@ -5,8 +5,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Getter
 @Entity
 @Table(name = "schedules")
@@ -15,10 +13,14 @@ public class Schedule extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
+    @Column(nullable = false)
     private String title;
+    @Column(nullable = false)
     private String content;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String password;
 
     public Schedule(String title, String content, String name, String password) {

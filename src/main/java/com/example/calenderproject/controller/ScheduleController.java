@@ -1,7 +1,12 @@
 package com.example.calenderproject.controller;
 
 
-import com.example.calenderproject.dto.*;
+import com.example.calenderproject.dto.request.CreateScheduleRequest;
+import com.example.calenderproject.dto.request.DeleteScheduleRequest;
+import com.example.calenderproject.dto.request.UpdateScheduleRequest;
+import com.example.calenderproject.dto.response.CreateScheduleResponse;
+import com.example.calenderproject.dto.response.GetScheduleResponse;
+import com.example.calenderproject.dto.response.UpdateScheduleResponse;
 import com.example.calenderproject.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
