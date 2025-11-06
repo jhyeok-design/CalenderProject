@@ -25,7 +25,7 @@ public class Comment extends BaseEntity {
     private Schedule schedule;
 
 
-    public Comment(String leaveComment, String writer, String password, Schedule schedule){
+    public Comment(String leaveComment, String writer, String password, Schedule schedule) {
         this.leaveComment = leaveComment;
         this.writer = writer;
         this.password = password;

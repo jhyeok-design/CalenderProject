@@ -17,7 +17,6 @@ public class UpdateScheduleResponse {
         this.id = id;
         this.title = title;
         this.name = name;
-
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
     }

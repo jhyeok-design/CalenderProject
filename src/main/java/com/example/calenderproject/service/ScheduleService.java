@@ -78,9 +78,7 @@ public class ScheduleService {
 
     @Transactional(readOnly = true)
     public GetScheduleResponse findOne(Long scheduleId) {
-        Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(
-                () -> new IllegalArgumentException("잘못된 접근입니다.")
-        );
+        Schedule schedule = exceptionHandler(scheduleId);
 
         List<Comment> comments = commentRepository.findBySchedule(schedule);
         List<GetCommentsResponse> leaveContentList = comments.stream()
@@ -108,9 +106,7 @@ public class ScheduleService {
 
     @Transactional
     public UpdateScheduleResponse update(Long scheduleId, UpdateScheduleRequest request) {
-        Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(
-                () -> new IllegalArgumentException("잘못된 접근입니다.")
-        );
+        Schedule schedule = exceptionHandler(scheduleId);
 
         if (request.getPassword().equals(schedule.getPassword())) {
             schedule.updateSchedule(
@@ -132,14 +128,20 @@ public class ScheduleService {
 
     @Transactional
     public void delete(Long scheduleId, DeleteScheduleRequest request) {
-        Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(
-                () -> new IllegalArgumentException("잘못된 접근입니다.")
-        );
+        Schedule schedule = exceptionHandler(scheduleId);
+
 
         if (!request.getPassword().equals(schedule.getPassword())) {
             throw new IllegalArgumentException("비빌번호가 틀렸습니다.");
         }
 
         scheduleRepository.deleteById(scheduleId);
+    }
+
+
+    private Schedule exceptionHandler(Long scheduleId) {
+        return scheduleRepository.findById(scheduleId).orElseThrow(
+                () -> new IllegalArgumentException("잘못된 접근입니다.")
+        );
     }
 }
