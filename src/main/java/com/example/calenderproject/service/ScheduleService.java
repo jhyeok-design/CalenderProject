@@ -11,7 +11,6 @@ import com.example.calenderproject.repository.CommentRepository;
 import com.example.calenderproject.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.annotations.Comments;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +25,7 @@ import java.util.stream.Collectors;
 public class ScheduleService {
     public final ScheduleRepository scheduleRepository;
     public final CommentRepository commentRepository;
-    private final CommentService commentService;
+
 
     @Transactional
     public CreateScheduleResponse save(CreateScheduleRequest request) {

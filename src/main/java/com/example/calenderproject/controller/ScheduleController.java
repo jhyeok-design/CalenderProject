@@ -9,10 +9,12 @@ import com.example.calenderproject.dto.response.GetAllScheduleResponse;
 import com.example.calenderproject.dto.response.GetScheduleResponse;
 import com.example.calenderproject.dto.response.UpdateScheduleResponse;
 import com.example.calenderproject.service.ScheduleService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -22,7 +24,7 @@ public class ScheduleController {
     private final ScheduleService scheduleService;
 
     @PostMapping("/schedules")
-    public ResponseEntity<CreateScheduleResponse> saveSchedule(@RequestBody CreateScheduleRequest request) {
+    public ResponseEntity<CreateScheduleResponse> saveSchedule(@RequestBody @Valid CreateScheduleRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(scheduleService.save(request));
     }
 
