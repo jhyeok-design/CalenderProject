@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "comments")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+
+// Lv5 일정 댓글  Entity
 public class Comment extends BaseEntity {
 
     @Id

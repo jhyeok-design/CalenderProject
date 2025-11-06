@@ -27,6 +27,7 @@ public class ScheduleService {
     public final CommentRepository commentRepository;
 
 
+    // Lv1 일정 생성
     @Transactional
     public CreateScheduleResponse save(CreateScheduleRequest request) {
         Schedule schedule = new Schedule(
@@ -49,6 +50,7 @@ public class ScheduleService {
         );
     }
 
+    // Lv2 일정 전체 확인
     @Transactional(readOnly = true)
     public List<GetAllScheduleResponse> findAll(String name) {
         List<Schedule> schedules = scheduleRepository.findAll();
@@ -76,6 +78,7 @@ public class ScheduleService {
         return dtos;
     }
 
+    // Lv2, 6 단일 일정 확인(댓글 확인도 추가)
     @Transactional(readOnly = true)
     public GetScheduleResponse findOne(Long scheduleId) {
         Schedule schedule = exceptionHandler(scheduleId);
@@ -88,7 +91,7 @@ public class ScheduleService {
                         comment.getWriter(),
                         comment.getCreatedAt(),
                         comment.getModifiedAt()))
-                .toList();
+                .collect(Collectors.toList());
 
 
         return new GetScheduleResponse(
@@ -104,6 +107,7 @@ public class ScheduleService {
         );
     }
 
+    // Lv3 일정 수정
     @Transactional
     public UpdateScheduleResponse update(Long scheduleId, UpdateScheduleRequest request) {
         Schedule schedule = exceptionHandler(scheduleId);
@@ -126,6 +130,7 @@ public class ScheduleService {
         );
     }
 
+    // Lv4 일정 삭제
     @Transactional
     public void delete(Long scheduleId, DeleteScheduleRequest request) {
         Schedule schedule = exceptionHandler(scheduleId);
@@ -139,6 +144,7 @@ public class ScheduleService {
     }
 
 
+    // 예외 처리 메서드
     private Schedule exceptionHandler(Long scheduleId) {
         return scheduleRepository.findById(scheduleId).orElseThrow(
                 () -> new IllegalArgumentException("잘못된 접근입니다.")

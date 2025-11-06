@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "schedules")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+
+// Lv1~4 일정  Entity
 public class Schedule extends BaseEntity {
 
     @Id
@@ -31,6 +33,7 @@ public class Schedule extends BaseEntity {
 
     }
 
+    // Lv3 일정 수정 메서드
     public void updateSchedule(String title, String name) {
         this.title = title;
         this.name = name;

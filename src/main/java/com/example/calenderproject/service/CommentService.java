@@ -17,6 +17,7 @@ public class CommentService {
     private final ScheduleRepository scheduleRepository;
 
 
+    // Lv5 일정 댓글 작성
     public CreateCommentResponse save(Long scheduleId, CreateCommentRequest request) {
          Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(
                  () -> new IllegalArgumentException("잘못된 접근입니다.")

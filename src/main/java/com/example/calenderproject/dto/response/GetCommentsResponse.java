@@ -1,10 +1,11 @@
 package com.example.calenderproject.dto.response;
 
 import lombok.Getter;
-
 import java.time.LocalDateTime;
 
 @Getter
+
+// Lv5 댓글 생성 dto
 public class GetCommentsResponse {
 
     private final Long id;

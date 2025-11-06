@@ -18,6 +18,7 @@ public class CommentController {
 
     private final CommentService commentService;
 
+    // LV5 댓글 생성
     @PostMapping("/schedules/{scheduleId}/comments")
     public ResponseEntity<CreateCommentResponse> saveComments(
             @PathVariable Long scheduleId,

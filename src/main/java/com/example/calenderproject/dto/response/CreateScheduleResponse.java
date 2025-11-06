@@ -1,11 +1,11 @@
 package com.example.calenderproject.dto.response;
 
 import lombok.Getter;
-
 import java.time.LocalDateTime;
 
-
 @Getter
+
+// Lv1 일정 생성 dto
 public class CreateScheduleResponse {
 
     private final Long id;

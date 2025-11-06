@@ -4,8 +4,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 
-
 @Getter
+
+// Lv1 일정 생성 dto
 public class CreateScheduleRequest {
 
     @NotBlank(message = "제목은 필수 입력 값입니다.")

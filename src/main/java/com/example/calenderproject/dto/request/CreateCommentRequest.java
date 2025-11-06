@@ -7,6 +7,7 @@ import lombok.Getter;
 
 @Getter
 
+// Lv5 일정에 댓글 작성 dto
 public class CreateCommentRequest {
 
     @NotBlank(message = "내용은 필수 입력 값입니다.")

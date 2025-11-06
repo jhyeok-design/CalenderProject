@@ -1,11 +1,11 @@
 package com.example.calenderproject.dto.response;
 
 import lombok.Getter;
-
 import java.time.LocalDateTime;
 
 @Getter
 
+// Lv5 일정에 댓글 작성 dto
 public class CreateCommentResponse {
 
     private final Long id;
